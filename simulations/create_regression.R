@@ -2,7 +2,7 @@
 regression_sim<-function(N,a,b, typeerror, sd_chosen,inter,lambda,degf,intercept2){
 
 # fixed x
-x<-seq(20,40,0.05)
+x<-seq(5,25,0.05)
 
 x<-sample(x,N, replace=T)
 
@@ -25,8 +25,8 @@ if(typeerror =='tdistribution'){
 
 if(typeerror =='omittedvar'){
 	
-	z<-seq(0,10,0.1)
-    z<-sample(z,N, replace=T)
+	z<-rnorm(N,0,1)
+    # z<-sample(z,N, replace=T)
 	error<-rnorm(N,0,1)+ intercept2*z
 }
 

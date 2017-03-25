@@ -68,7 +68,8 @@ plot_residuals_hist(simulated_model,intercept, slope)
 	 
 	 })		 	 
 	
-	
+
+
 	 output$pred_residuals <-renderPlot({
 plot_residuals(simulated_model,intercept, slope)		
  })		
@@ -137,7 +138,7 @@ time_chosen=tags$input(id='time',type="number", value=10, min=5, max=500),
 plot_regression=plotOutput('regression'),
 plot_residuals=plotOutput('residuals'),
 
-plot_predresiduals=plotOutput('pred_residuals'),
+plot_predresiduals= plotOutput('pred_residuals'),
 plot_estimatedpar=plotOutput('estimatedpar'),
 plot_estimatedpar_normalised=plotOutput('estimatedpar_normalised'),
 summary_reg=tableOutput('table')

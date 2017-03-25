@@ -27,7 +27,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
 					event.preventDefault();
-					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},500);
 				});
 			});
 		</script>
@@ -127,26 +127,105 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<span id="normalparam">    
 	  <li>Standard deviation: 
 	  <input type="number" id="sdev" value=5 step=.5 style="width:70px;"></li >
+	  
+	  <li  align='right'>   <span onclick="distribinfo()">   Normal distribution      <img src="images/questionmark.png"  style="height:25px">   </span> </li> 
+<div id="infodistrib" class="information"> 
+<p align="center">
+Y= a+bX+&#949;
+</p>
+<p>
+Normal distribution is assumed in finite sample theory.
+</p>
+<p>
+Key assumptions of the regression model are:
+	<ul>
+<li> Linearity: E(Y)=a+bX </li>
+ <li> Constant variance: Var(Y | X)=&#963;<sup>2</sup> </li>  
+ <li> <span style="font-weight:bold">Normality </span>:  &#949;~N(0,&#963;<sup>2</sup>) </li>
+ <li> Independence: the observations are sampled independently.  </li> 
+ <li> X is independent of the error term: X &#8869;&#949;	</li>
+	<ul>
+</p>
+</div>
     </span>
 
 	<span id="tdistparam" class="hidenparameter">    
 	  <li>Degrees of freedom: 
-	  <input type="number" id="degf" value="2" step=.5 style="width:70px;"></li >
+	  <input type="number" id="degf" value="2" step=.5 style="width:70px;">
+	  </li >
+	  	  <li  align='right'>   <span onclick="distribinfo2()">   Student's t distribution and Fat tails      <img src="images/questionmark.png"  style="height:25px">   </span> </li> 
+<div id="infodistrib2" class="information"> 
+<p>
+The Student's t distribution has heavier tails than the normal distribution.
+<p> When the degrees of freedom is large, the Student's distribution is approximately a normal distribution. </p>
+<p>When the degrees of freedom is small, extreme events are more likely to occur than in a normal distribution.
+</p>
+<span style="font'weight:bold">Example:  Simulate 50 observations with the error having a  Student's t-distribution with degrees of freedom equal to 1.2.
+<p>
+After doing the simulation, you can observe that it is likely to observe extreme obsevations, which move the estimated parameter far from the true value. 
+</p>
+</div>
      </span>
 
 	<span id="expparam" class="hidenparameter">    
 	  <li>  Lambda: 
 	  <input type="number" id="lambda" value=.1 step=.1 style="width:70px;"></li >
+	  	  	  <li  align='right'>   <span onclick="distribinfo3()">   Non-Gaussian distribution     <img src="images/questionmark.png"  style="height:25px">   </span> </li> 
+<div id="infodistrib3" class="information"> 
+<p>
+The normality assumption is needed for finite sample theory, but it is not necessary for large samples.
+</p>
+<p>
+As a result of the central limit theorem and the law of large numbers and under mild conditions of the error term:
+</p>
+<ul>
+<li>The estimators converge to the true parameter. </li>
+<li> Hypothesis testing and confident intervals are approximately valid for large samples.
+</li>
+</ul>
+</div>
+	  
      </span>
 
 	<span id="uniformparam" class="hidenparameter">    
 	  <li>  Interval: 
 	  <input type="number" id="interv" value=5 step=1 style="width:70px;"></li >
-     </span>
+	  	  	  <li  align='right'>   <span onclick="distribinfo4()">   Non-Gaussian distribution     <img src="images/questionmark.png"  style="height:25px">   </span> </li> 
+<div id="infodistrib4" class="information"> 
+<p>
+The normality assumption is needed for finite sample theory, but it is not necessary for large samples.
+</p>
+<p>
+As a result of the central limit theorem and the law of large numbers and under mild conditions of the error term::
+</p>
+<ul>
+<li>The estimators converge to the true parameter. </li>
+<li> Hypothesis testing and confident intervals are approximately valid for large samples.
+</li>
+</ul>
+</div>
+	       </span>
 
 	<span id="omittedvarparameter" class="hidenparameter">    
 	  <li>  Slope of omitted variable: 
 	  <input type="number" id="omittedvar" value=-1 step=.5 style="width:70px;"></li >
+	  	  	  	  <li  align='right'>   <span onclick="distribinfo5()">   Omitted variable bias     <img src="images/questionmark.png"  style="height:25px">   </span> </li> 
+<div id="infodistrib5" class="information"> 
+<p>
+Omitted variable bias occurs when the model leaves one or more important factors. </p>
+<p>
+Suppose that the true model is y= &#945; + &#946;*x+ &#950;* z +&#949;
+</p>
+<p> However, we estimate the model y= &#945; + &#946;*x +&#949;
+</p>
+<p> 
+If x and z are uncorrelated, the only the estimated slope will have some biased caused by the misspecification of the model.
+</p>
+<p>
+If x and z are correlated, the the estimated paramter for the slope will be biased.
+</p>
+
+</div>
       </span>
 
 </ol>
@@ -189,7 +268,41 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<li> Simulate 1000 samples  </li>
 
 		<li>    <button onclick="runregressions()" class="buttons">Run regressions</button>  </li>
-				</ol>	
+			
+<li >   <span onclick="CLTinfo()"> Large sample properties <img src="images/questionmark.png"  style="height:25px">   </span> </li> 
+<li>
+<div id="infoCLT" class="information"> 
+<p>  For large samples:  p-values  and confidence Intervals are approximately valid without assuming that the error are drawn from a normal distribution.
+</p>
+<p>
+<span style="font-weight:blod;">Example: Simulate 500 observations with the error having a  Student's t-distribution with 1.2 degrees of freedom.
+</p>
+<p>
+<span style="font-weight:bold">Question:  </span>Are the estimated parameters close to the true value? 
+Answer: Probably not
+</p>		
+<p>
+However, the estimated parameters distributed around the true value, and they are asymptotically normal.
+</p>
+</div>	
+<li >   <span onclick="OVBinfo()"> Omitted variable bias <img src="images/questionmark.png"  style="height:25px">   </span> </li> 
+ 
+<div id="infoOVB" class="information"> 
+<p>
+Omitted variable bias occurs when the model leaves one or more important factors. </p>
+<p>
+Suppose that the true model is y= &#945; + &#946;*x+ &#950;* z +&#949;
+</p>
+<p> However, we estimate the model y= &#945; + &#946;*x +&#949;
+</p>
+<p> 
+If x and z are uncorrelated, the only the estimated slope will have some biased caused by the misspecification of the model.
+</p>
+<p>
+If x and z are correlated, the the estimated paramter for the slope will be biased.
+</p>
+</div>
+	</ol>	
 				{{plot_estimatedpar}}
 				
 				{{plot_estimatedpar_normalised}}
@@ -204,7 +317,69 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
  </div>
 
- 
+ <script>
+ function CLTinfo() {
+    var x = document.getElementById('infoCLT');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+
+
+ function OVBinfo() {
+    var x = document.getElementById('infoOVB');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+
+ function distribinfo() {
+    var x = document.getElementById('infodistrib');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+
+ function distribinfo2() {
+    var x = document.getElementById('infodistrib2');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+ function distribinfo3() {
+    var x = document.getElementById('infodistrib3');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+
+
+ function distribinfo4() {
+    var x = document.getElementById('infodistrib4');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+ function distribinfo5() {
+    var x = document.getElementById('infodistrib5');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+} </script>
 
  
  
