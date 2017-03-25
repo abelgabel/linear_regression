@@ -12,6 +12,8 @@
    var interv= document.getElementById("interv").value;
    var lambda= document.getElementById("lambda").value;
    var omittedvar= document.getElementById("omittedvar").value;
+   var correlationOVM= document.getElementById("OVBcheckbox").checked;
+   var correlationOVMpositive= document.getElementById("OVBcheckboxCorr").checked;
 
      	 	 input2=input2+1;
     var distribution_chosen = document.getElementById("selectdistribution").value;
@@ -25,6 +27,8 @@
         Shiny.onInputChange("interv", interv);  
         Shiny.onInputChange("lambda", lambda);  
         Shiny.onInputChange("omittedvar", omittedvar);  
+        Shiny.onInputChange("correlationOVM", correlationOVM);  
+        Shiny.onInputChange("correlationOVMpositive", correlationOVMpositive);  
         Shiny.onInputChange("simulation2", input3);    
 
 if(distribution_chosen!="omittedvar"){
@@ -36,15 +40,33 @@ document.getElementById("regressiondef").innerHTML = "y ="+ intercept+slope+" x"
 };
 if(distribution_chosen=="omittedvar"){
 if(slope>0){  
-document.getElementById("regressiondef").innerHTML = "y = "+intercept+"+"+slope+" x "+omittedvar+"z"+" + &#986";}
+if(omittedvar<0){
+document.getElementById("regressiondef").innerHTML = "y = "+intercept+"+"+slope+" x "+omittedvar+"z"+" + &#986";
+}
+if(omittedvar>0){
+document.getElementById("regressiondef").innerHTML = "y = "+intercept+"+"+slope+" x +"+omittedvar+"z"+" + &#986";
+}
+}
 
 if(slope<0){  
+if(omittedvar<0){
 document.getElementById("regressiondef").innerHTML = "y ="+ intercept+slope+" x"+omittedvar+" z "+" + &#986";}
+if(omittedvar>0){
+document.getElementById("regressiondef").innerHTML = "y ="+ intercept+slope+" x+"+omittedvar+" z "+" + &#986";}
+}
+
 };
                     }
                     ;
                     
-                    
+          function correlationfun(checkboxElem){
+            var z= document.getElementById("OVBcheckboxCorrspan");
+             if (checkboxElem.checked === true) {
+        z.style.display = 'block';
+    } else {
+        z.style.display = 'none';
+}
+          }          
 
                      function choosedist() {
     var x = document.getElementById("selectdistribution").value;
@@ -93,5 +115,74 @@ document.getElementById("regressiondef").innerHTML = "y ="+ intercept+slope+" x"
         x.style.display = 'none';
     }
 };
+
+
+
+ function CLTinfo() {
+    var x = document.getElementById('infoCLT');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+};
+
+ function OVBinfo() {
+    var x = document.getElementById('infoOVB');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+};
+
+ function distribinfo() {
+    var x = document.getElementById('infodistrib');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+};
+
+ function distribinfo2() {
+    var x = document.getElementById('infodistrib2');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+};
+
+
+ function distribinfo3() {
+    var x = document.getElementById('infodistrib3');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+};
+
+
+ function distribinfo4() {
+    var x = document.getElementById('infodistrib4');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+};
+
+ function distribinfo5() {
+    var x = document.getElementById('infodistrib5');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+
+
 
 

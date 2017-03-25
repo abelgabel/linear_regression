@@ -1,5 +1,5 @@
 
-regression_sim<-function(N,a,b, typeerror, sd_chosen,inter,lambda,degf,intercept2){
+regression_sim<-function(N,a,b, typeerror, sd_chosen,inter,lambda,degf,intercept2, corrOVM, corrOVMpositive){
 
 # fixed x
 x<-seq(5,25,0.05)
@@ -25,8 +25,16 @@ if(typeerror =='tdistribution'){
 
 if(typeerror =='omittedvar'){
 	
-	z<-rnorm(N,0,1)
-    # z<-sample(z,N, replace=T)
+	z<-seq(from=0, to=10, by=.04)
+if(corrOVM==T){
+	if(corrOVMpositive==T)
+ z<-sample(z,N, replace=T)*x
+ else
+ z<- -sample(z,N, replace=T)*x
+ 
+ }
+ else
+ z<-sample(z,N, replace=T)
 	error<-rnorm(N,0,1)+ intercept2*z
 }
 

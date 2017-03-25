@@ -28,7 +28,6 @@ server <- function(input, output, session) {
 
  observeEvent(input$simulation, {
 
-
 intercept<-input$intercept
 slope<-input$slope
  	
@@ -38,7 +37,8 @@ typeerror<-input$selectdistribution
  interv<-input$interv
  lambda<-input$lambda
  omittedvar<-input$omittedvar
-
+corrOVM<-input$correlationOVM
+corrOVMpositive<-input$correlationOVMpositive
  sample_size <-input$sample_size
 
 
@@ -53,8 +53,7 @@ omittedvar<-as.numeric(omittedvar)
 N<-as.numeric(sample_size)
 distribution_chosen<-input$distribution_chosen
 
-
-    simulated_model<-regression_sim(N, a=intercept, b=slope, typeerror= typeerror , sd_chosen=sd_chosen, inter=interv, lambda =lambda, degf=degf, intercept2 =omittedvar)
+    simulated_model<-regression_sim(N, a=intercept, b=slope, typeerror= typeerror , sd_chosen=sd_chosen, inter=interv, lambda =lambda, degf=degf, intercept2 =omittedvar, corrOVM=corrOVM, corrOVMpositive = corrOVMpositive)
 
                   
  	 # Plot
@@ -108,7 +107,7 @@ results
  
  observeEvent(input$simulation2, {
  	aaa<-input$simulation2
-	simul2<-simulated_regression(N= N,a=intercept,b=slope, typeerror= typeerror, sd_chosen= sd_chosen, inter= interv,lambda= lambda,degf= degf, omittedvar= omittedvar)
+	simul2<-simulated_regression(N= N,a=intercept,b=slope, typeerror= typeerror, sd_chosen= sd_chosen, inter= interv,lambda= lambda,degf= degf, omittedvar= omittedvar,corrOVM= corrOVM, corrOVMpositive= corrOVM)
 	 	 
 	 output$estimatedpar<-renderPlot({
 plot_hist_estimpar(simul2)
